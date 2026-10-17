@@ -3,8 +3,9 @@ import "./App.css";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import Header from "../Header/Header";
-import Preloader from "../Preloader/Preloader";
+import Header from "../Header/Header.jsx";
+import Preloader from "../Preloader/Preloader.jsx";
+import Navigation from "../Navigation/Navigation.jsx";
 
 function App() {
   const location = useLocation();
