@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Preloader from "../Preloader/Preloader.jsx";
 import Navigation from "../Navigation/Navigation.jsx";
+import SearchForm from "../SearchForm/SearchForm.jsx";
+import Main from "../Main/Main.jsx";
+import About from "../About/About.jsx";
 
 function App() {
   const location = useLocation();
