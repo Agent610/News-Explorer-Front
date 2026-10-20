@@ -1,0 +1,162 @@
+.footer {
+  padding: 20px 40px;
+  background-color: #fff;
+}
+
+.footer__content {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-right: 40px;
+}
+
+.footer__copyright {
+  margin: 0;
+  font-size: 16px;
+  color: #b6bcbf;
+  order: 1;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  margin-left: 104px;
+}
+
+.footer__nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  order: 2;
+  margin-left: 524px;
+  flex: 1 1 auto;
+}
+
+.footer__nav-link {
+  text-decoration: none;
+  color: black;
+  width: auto;
+  min-width: max-content;
+  height: 24px;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.footer__nav-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.footer__nav-link:focus-visible {
+  outline: 2px solid #2f71e5;
+  outline-offset: 2px;
+  text-decoration: underline;
+}
+
+.footer__nav-link:nth-last-child(2) {
+  margin-left: 20px;
+}
+
+.footer__icon {
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.2s;
+}
+
+.footer__icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  order: 3;
+  margin-left: 40px;
+}
+
+.footer__icon:hover {
+  opacity: 0.7;
+}
+
+.footer__icon:focus-visible {
+  outline: 2px solid #2f71e5;
+  outline-offset: 2px;
+  opacity: 0.7;
+}
+
+/* Tablet View */
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 10px 15px;
+    box-sizing: border-box;
+  }
+
+  .footer__content {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .footer__nav {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+
+  .footer__icons {
+    margin-left: 0;
+  }
+
+  .footer__copyright {
+    margin-left: 0;
+    flex: 1 1 auto;
+  }
+}
+
+/*Mobile */
+@media screen and (max-width: 425px) {
+  .footer {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer__content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    position: relative;
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    order: 1;
+    margin-left: 0;
+    align-self: flex-start;
+  }
+
+  .footer__icon {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .footer__icons {
+    order: 2;
+    align-self: flex-end;
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+
+  .footer__copyright {
+    color: #999;
+    font-size: 16px;
+    order: 3;
+    width: 288px;
+  }
+}

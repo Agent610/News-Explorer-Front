@@ -10,6 +10,15 @@ import SearchForm from "../SearchForm/SearchForm.jsx";
 import Main from "../Main/Main.jsx";
 import About from "../About/About.jsx";
 import NewsCard from "../NewsCard/NewsCard.jsx";
+import {
+  login,
+  register,
+  checkToken,
+  setToken,
+  getToken,
+  removeToken,
+} from "../../utils/auth.js";
+import Footer from "../Footer/Footer.jsx";
 
 function App() {
   const location = useLocation();
