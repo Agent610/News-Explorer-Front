@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation.jsx";
-//import SearchForm from "../SearchForm/SearchForm.jsx";
+import SearchForm from "../SearchForm/SearchForm.jsx";
 import { useLocation } from "react-router-dom";
 
 function Header({
