@@ -1,0 +1,117 @@
+/*Desktop view */
+.newscard-list {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: #f5f6f7;
+}
+
+.newscard-list__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 32px 0;
+  background-color: #f5f6f7;
+}
+
+.newscard-list__show-more {
+  display: block;
+  margin: 64px auto 0;
+  padding: 20px 60px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #1a1b22;
+  border: 1px solid #1a1b22;
+  border-radius: 80px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  width: 288px;
+  height: 64px;
+  text-align: center;
+  transition:
+    background-color 0.3 ease,
+    color 0.3s ease;
+  margin-bottom: 80px;
+}
+
+.newscard-list__show-more:hover {
+  background-color: #e8e8e8;
+  color: #1a1b22;
+}
+
+.newscard-list__no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d1d2d6;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.newscard-list__no-results-image {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 32px;
+}
+
+.newscard-list__no-results-title {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #1a1b22;
+  margin: 0 0 16px;
+}
+
+.newscard-list__no-results-text {
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  max-width: 400px;
+  text-align: center;
+  white-space: pre-line;
+  margin-left: 542px;
+}
+
+/*Tablet View*/
+@media screen and (max-width: 768px) {
+  .newscard-list {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .newscard-list__no-results-text {
+    margin-left: 185px;
+  }
+  .newscard-list__container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .newscard-list__show-more {
+    width: 240px;
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .newscard-list__container {
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    gap: 10px;
+  }
+}
+
+/*Mobile view */
+
+@media screen and (max-width: 425px) {
+  .newscard-list {
+    max-width: 425px;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .newscard-list__container {
+    grid-template-columns: 1fr;
+  }
+}

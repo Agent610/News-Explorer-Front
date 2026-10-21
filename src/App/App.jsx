@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Preloader from "../Preloader/Preloader.jsx";
 import Navigation from "../Navigation/Navigation.jsx";
@@ -19,6 +19,7 @@ import {
   removeToken,
 } from "../../utils/auth.js";
 import Footer from "../Footer/Footer.jsx";
+import SavedNews from "../SavedNews/SavedNews.jsx";
 
 function App() {
   const location = useLocation();
@@ -228,6 +229,26 @@ function App() {
           setShowSearchForm={setShowSearchForm}
           handleMobileClick={() => setActiveModal("mobile")}
         />
+
+        <Main>
+          {/* {Insert logic here} More*/}
+          <About />
+
+          {/* <Route
+          path="/saved-news"
+          element={
+            <SavedNews
+            savedArticles={savedArticles}
+            isLoggedIn={isLoggedIn}
+            onSaveArticle={handleSaveArticle}
+            currentUser={currentUser}
+            onDeleteArticle={handleDeleteArticle}
+            />
+          }
+          </Routes> */}
+        </Main>
+
+        <Footer></Footer>
       </div>
       {/* DON'T TOUCH THESE THREE LINES */}
     </div>
