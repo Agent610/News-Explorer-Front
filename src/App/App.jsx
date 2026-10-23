@@ -20,6 +20,7 @@ import {
 } from "../../utils/auth.js";
 import Footer from "../Footer/Footer.jsx";
 import SavedNews from "../SavedNews/SavedNews.jsx";
+import LoginModal from "../LoginModal/LoginModal.jsx";
 
 function App() {
   const location = useLocation();
