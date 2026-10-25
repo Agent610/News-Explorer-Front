@@ -1,4 +1,4 @@
-const News_URL = "https://newsapi.org/";
+const News_URL = "https://newsapi.org/v2/everything";
 const API_KEY = "fb6cff6571004bdb8d9f0274dc7989a1";
 
 export function searchNews(query) {
