@@ -1,0 +1,87 @@
+/* Mobile View */
+@media screen and (max-width: 425px) {
+  .mobile {
+    background-color: #1a1b22;
+    height: 230px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+  }
+
+  .mobile__link {
+    width: 288px;
+    height: 56px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 56px;
+    margin-left: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+    color: white;
+  }
+
+  .mobile__link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .mobile__link:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    text-decoration: underline;
+  }
+
+  .mobile__button {
+    width: 288px;
+    height: 56px;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 100px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .mobile__button:hover {
+    background-color: #245dd8;
+    color: #ffff;
+    border: 1px solid #245dd8;
+    cursor: pointer;
+  }
+
+  .mobile__button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .mobile__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .mobile__close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+
+  .mobile__close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .mobile__close-icon {
+    width: 24px;
+    height: 24px;
+  }
+}

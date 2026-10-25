@@ -1,0 +1,59 @@
+.registration-success__modal {
+  position: relative;
+  width: 430px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0 0.15);
+  box-sizing: border-box;
+  height: 182px;
+}
+
+.registration-success__message {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #000;
+}
+
+.registration-success__button {
+  background: none;
+  border: none;
+  color: #2f71e5;
+  cursor: pointer;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.registration-success__button:hover {
+  text-decoration: underline;
+}
+
+.registration-success__button:focus {
+  outline: 2px solid #2f71e5;
+  outline-offset: 2px;
+}
+
+.modal__close-button {
+  position: absolute;
+  top: -38px;
+  right: -38px;
+  background: transparent;
+  background-image: url("../../images/close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+}
+
+.modal__close-button:hover {
+  cursor: pointer;
+}
+
+.modal__close-button:focus {
+  outline: 2px solid #2f71e5;
+  outline-offset: 2px;
+}

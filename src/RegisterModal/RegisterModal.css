@@ -1,0 +1,36 @@
+.register__link {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: #2f71e5;
+  height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  padding: 0%;
+  margin: 20px auto 0;
+  display: block;
+  text-align: center;
+}
+
+.register__link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.register__link:focus-visible {
+  outline: 2px solid #2f71e5;
+  outline-offset: 2px;
+}
+
+.registration-success {
+  text-align: center;
+  padding: 20px;
+}
+
+.registration-success p {
+  font-size: 24px;
+  color: #000;
+  margin: 0;
+  font-weight: 900;
+}

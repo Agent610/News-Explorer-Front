@@ -21,6 +21,12 @@ import {
 import Footer from "../Footer/Footer.jsx";
 import SavedNews from "../SavedNews/SavedNews.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import MobileModal from "../MobileModal/MobileModal.jsx";
+import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import RegistrationSuccess from "../RegistrationSuccess/RegistrationSuccess.jsx";
+import { getItems, saveArticle, deleteArticle } from "../../utils/api.js";
+import { searchNews } from "../../utils/news.js";
 
 function App() {
   const location = useLocation();
