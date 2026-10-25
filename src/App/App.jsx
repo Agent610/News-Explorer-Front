@@ -27,6 +27,7 @@ import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import RegistrationSuccess from "../RegistrationSuccess/RegistrationSuccess.jsx";
 import { getItems, saveArticle, deleteArticle } from "../../utils/api.js";
 import { searchNews } from "../../utils/news.js";
+import NewsCardList from "../NewsCardList/NewsCardList.jsx";
 
 function App() {
   const location = useLocation();
@@ -238,26 +239,72 @@ function App() {
         />
 
         <Main>
-          {/* {Insert logic here} More*/}
-          <About />
-
-          {/* <Route
-          path="/saved-news"
-          element={
-            <SavedNews
-            savedArticles={savedArticles}
-            isLoggedIn={isLoggedIn}
-            onSaveArticle={handleSaveArticle}
-            currentUser={currentUser}
-            onDeleteArticle={handleDeleteArticle}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  {hasSearched && (
+                    <>
+                      <h2 className="search__title">Search Results</h2>
+                      <NewsCardList
+                        articles={searchResults}
+                        isLoggedIn={isLoggedIn}
+                        onSaveArticle={handleSaveArticle}
+                        savedArticles={savedArticles}
+                        onDeleteArticle={handleDeleteArticle}
+                      />
+                    </>
+                  )}
+                  <About />
+                </>
+              }
             />
-          }
-          </Routes> */}
+            <Route
+              path="/saved-news"
+              element={
+                <SavedNews
+                  savedArticles={savedArticles}
+                  isLoggedIn={isLoggedIn}
+                  onSaveArticle={handleSaveArticle}
+                  currentUser={currentUser}
+                  onDeleteArticle={handleDeleteArticle}
+                />
+              }
+            />
+          </Routes>
         </Main>
 
         <Footer></Footer>
+
+        {activeModal === "registerSuccess" && (
+          <RegistrationSuccess
+            onClose={handleCloseModal}
+            handleSigninClick={() => setActiveModal("login")}
+          />
+        )}
+
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onSubmit={handleLogin}
+          onClose={handleCloseModal}
+          handleSignupClick={() => setActiveModal("register")}
+        />
+        <RegisterModal
+          isOpen={activeModal === "register"}
+          onSubmit={handleRegister}
+          onClose={handleCloseModal}
+          handleSigninClick={() => setActiveModal("login")}
+        />
+        <MobileModal
+          isOpen={activeModal === "mobile"}
+          onClose={handleCloseModal}
+          handleSigninClick={() => setActiveModal("login")}
+          isLoggedIn={isLoggedIn}
+          handleSignoutClick={handleSignoutClick}
+          currentUser={currentUser}
+        />
       </div>
-      {/* DON'T TOUCH THESE THREE LINES */}
     </div>
   );
 }
