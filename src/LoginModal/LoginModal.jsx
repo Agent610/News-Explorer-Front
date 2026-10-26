@@ -72,7 +72,7 @@ const LoginModal = ({ isOpen, onSubmit, onClose, handleSignupClick }) => {
             type="password"
             className="modal__input"
             id="login-password"
-            placeholder="Enter passwrod"
+            placeholder="Enter password"
             onChange={handlePasswordOnChange}
             value={password}
             required

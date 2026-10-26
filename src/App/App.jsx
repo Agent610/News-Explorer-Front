@@ -43,6 +43,14 @@ function App() {
   const [showSearchForm, setShowSearchForm] = useState(true);
   const [message, setMessage] = useState("");
 
+  const userStorageKey = isLoggedIn
+    ? currentUser?._id || currentUser?.id || currentUser?.email || null
+    : null;
+
+  const savedArticlesKey = userStorageKey
+    ? `savedArticles:${userStorageKey}`
+    : null;
+
   //Modals
   const [activeModal, setActiveModal] = useState("");
 
@@ -102,6 +110,7 @@ function App() {
   //Article save functionality
   const [savedArticles, setSavedArticles] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
+  const [loadedUserKey, setLoadedUserKey] = useState(null);
 
   const handleSaveArticle = (title, link, description, source, image) => {
     if (!isLoggedIn) {
@@ -137,6 +146,34 @@ function App() {
     setSavedArticles((prev) => prev.filter((article) => article.url !== link));
   };
 
+  React.useEffect(() => {
+    if (!savedArticlesKey) {
+      setSavedArticles([]);
+      setLoadedUserKey(null);
+      return;
+    }
+
+    try {
+      const saved = localStorage.getItem(savedArticlesKey);
+      const parsedArticles = saved ? JSON.parse(saved) : [];
+
+      setSavedArticles(Array.isArray(parsedArticles) ? parsedArticles : []);
+    } catch (error) {
+      console.error("Failed to load saved articles:", error);
+      setSavedArticles([]);
+    }
+
+    setLoadedUserKey(savedArticlesKey);
+  }, [savedArticlesKey]);
+
+  React.useEffect(() => {
+    if (!savedArticlesKey || loadedUserKey !== savedArticlesKey) {
+      return;
+    }
+
+    localStorage.setItem(savedArticlesKey, JSON.stringify(savedArticles));
+  }, [savedArticles, savedArticlesKey, loadedUserKey]);
+
   //Authentication
 
   const handleLogin = ({ email, password }) => {
@@ -146,6 +183,7 @@ function App() {
       .then((response) => {
         if (response.token) {
           setToken(response.token);
+
           setLoggedIn(true);
           setCurrentUser(response.user);
           localStorage.setItem("currentUser", JSON.stringify(response.user));
