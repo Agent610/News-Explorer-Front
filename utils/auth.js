@@ -4,89 +4,37 @@ import { handleServerResponse } from "./api.js";
 const TOKEN_KEY = "jwt";
 
 export const login = ({ email, password }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const storedUsers = JSON.parse(localStorage.getItem("mockUsers")) || [];
-
-      const existingUser = storedUsers.find(
-        (user) => user.email === email && user.password === password,
-      );
-
-      if (!existingUser) {
-        return reject({
-          success: false,
-          message: "Error invalid email or password try again.",
-        });
-      }
-
-      resolve({
-        success: true,
-        message: "Login successful",
-        user: {
-          name: existingUser.userName,
-          email: existingUser.email,
-        },
-        token: "mock-jwt-token-" + Math.random().toString(36).substring(2),
-      });
-    }, 1000);
-  });
+  return fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  }).then(handleServerResponse);
 };
 
-//const mockUser = [];
-
 export const register = ({ email, password, userName }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (!email || !password || !userName) {
-        return reject({
-          success: false,
-          message: "All fields are required.",
-        });
-      }
-
-      const storedUsers = JSON.parse(localStorage.getItem("mockUsers")) || [];
-
-      const existingUser = storedUsers.find((user) => user.email === email);
-      if (existingUser) {
-        return reject({
-          success: false,
-          message: "User already exists with this email.",
-        });
-      }
-
-      const newUser = {
-        email,
-        password,
-        userName,
-        token: `mock-token-${Date.now()}`,
-      };
-      storedUsers.push(newUser);
-      localStorage.setItem("mockUsers", JSON.stringify(storedUsers));
-
-      resolve({
-        success: true,
-        message: "Registration successful.",
-        user: {
-          email: newUser.email,
-          userName: newUser.userName,
-        },
-        token: newUser.token,
-      });
-    }, 1000);
-  });
+  return fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      name: userName,
+    }),
+  }).then(handleServerResponse);
 };
 
 //Token
 export const checkToken = (token) => {
-  return new Promise((resolve, reject) => {
-    if (token === "token") {
-      resolve({
-        data: { name: "User", email: "noEmail@yahoo.com", _id: "12345" },
-      });
-    } else {
-      reject("Invalid token");
-    }
-  });
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerResponse);
 };
 
 export const setToken = (token) => {

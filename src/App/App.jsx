@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../Header/Header.jsx";
@@ -93,7 +93,12 @@ function App() {
 
     searchNews(query)
       .then((response) => {
-        setSearchResults(response);
+        const articlesWithKeyword = response.map((article) => ({
+          ...article,
+          keyword: query,
+        }));
+
+        setSearchResults(articlesWithKeyword);
         setShowSearchForm(true);
       })
       .catch((error) => {
@@ -113,37 +118,46 @@ function App() {
   const [loadedUserKey, setLoadedUserKey] = useState(null);
 
   const handleSaveArticle = (title, link, description, source, image) => {
-    if (!isLoggedIn) {
-      return;
-    }
+    if (!isLoggedIn) return;
 
-    const alreadySaved = savedArticles.some((article) => article.url === link);
+    const originalArticle = searchResults.find(
+      (article) => article.url === link,
+    );
 
-    if (alreadySaved) {
-      setSavedArticles((prev) =>
-        prev.filter((article) => article.url !== link),
-      );
-    } else {
-      setSavedArticles((prev) => [
-        ...prev,
-        {
-          title,
-          url: link,
-          description: description,
-          source: { name: source },
-          urlToImage: image,
-          keyword: searchKeyword,
-        },
-      ]);
-    }
+    const articleData = {
+      keyword: searchKeyword,
+      title,
+      text: description,
+      date: originalArticle?.publishedAt || new Date().toISOString(),
+      source,
+      link,
+      image,
+    };
+
+    saveArticle(articleData)
+      .then((savedArticle) => {
+        setSavedArticles((previousArticles) => [
+          ...previousArticles,
+          savedArticle,
+        ]);
+      })
+      .catch((error) => {
+        console.error("Failed to save article:", error);
+      });
   };
 
-  const handleDeleteArticle = (link) => {
-    if (!isLoggedIn) {
-      return;
-    }
+  const handleDeleteArticle = (articleId) => {
+    if (!isLoggedIn) return;
 
-    setSavedArticles((prev) => prev.filter((article) => article.url !== link));
+    deleteArticle(articleId)
+      .then(() => {
+        setSavedArticles((previousArticles) =>
+          previousArticles.filter((article) => article._id !== articleId),
+        );
+      })
+      .catch((error) => {
+        console.error("Failed to delete article:", error);
+      });
   };
 
   React.useEffect(() => {
@@ -181,17 +195,30 @@ function App() {
 
     login({ email, password })
       .then((response) => {
-        if (response.token) {
-          setToken(response.token);
-
-          setLoggedIn(true);
-          setCurrentUser(response.user);
-          localStorage.setItem("currentUser", JSON.stringify(response.user));
-          handleCloseModal();
+        if (!response.token) {
+          throw new Error("The server didn't return an authentication token.");
         }
+
+        setToken(response.token);
+
+        return checkToken(response.token);
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        setLoggedIn(true);
+        handleCloseModal();
+
+        return getItems()
+          .then((articles) => {
+            setSavedArticles(articles);
+          })
+          .catch((error) => {
+            console.error("Couldn't load saved articles:", error);
+            setSavedArticles([]);
+          });
       })
       .catch((error) => {
-        console.error("Login failed", error);
+        console.error("Failure in Login:", error);
       })
       .finally(() => {
         setIsAuthLoading(false);
@@ -202,14 +229,12 @@ function App() {
     setIsAuthLoading(true);
 
     register({ email, password, userName })
-      .then((response) => {
-        if (response) {
-          setMessage("Registration successfully completed !");
-          setActiveModal("registerSuccess");
-        }
+      .then(() => {
+        setMessage("Registration successfully completed!");
+        setActiveModal("registerSuccess");
       })
       .catch((error) => {
-        console.error("Registration failed", error);
+        console.error("Registration failed:", error);
         setMessage("Registration failed");
       })
       .finally(() => {
@@ -220,33 +245,37 @@ function App() {
   const handleSignoutClick = () => {
     removeToken();
     setLoggedIn(false);
+    setCurrentUser({});
+    setSavedArticles([]);
+    handleCloseModal();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const token = getToken();
-    const savedUser = localStorage.getItem("currentUser");
 
-    if (token && savedUser) {
-      setLoggedIn(true);
-      setCurrentUser(JSON.parse(savedUser));
-    }
+    if (!token) return;
+
+    checkToken(token)
+      .then((user) => {
+        setCurrentUser(user);
+        setLoggedIn(true);
+
+        return getItems();
+      })
+      .then((articles) => {
+        setSavedArticles(articles);
+      })
+      .catch((error) => {
+        console.error("Couldn't restore user session:", error);
+
+        removeToken();
+        setLoggedIn(false);
+        setCurrentUser({});
+        setSavedArticles([]);
+      });
   }, []);
 
   const [isSavedArticlesLoaded, setIsSavedArticlesLoaded] = useState(false);
-
-  React.useEffect(() => {
-    if (isSavedArticlesLoaded) {
-      localStorage.setItem("savedArticles", JSON.stringify(savedArticles));
-    }
-  }, [savedArticles, isSavedArticlesLoaded]);
-
-  React.useEffect(() => {
-    const saved = localStorage.getItem("savedArticles");
-    if (saved) {
-      setSavedArticles(JSON.parse(saved));
-    }
-    setIsSavedArticlesLoaded(true);
-  }, []);
 
   //Preloader
   const [isAuthLoading, setIsAuthLoading] = useState(false);

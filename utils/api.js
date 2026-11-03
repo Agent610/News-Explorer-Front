@@ -1,42 +1,46 @@
-import { func } from "prop-types";
+export const baseUrl = "http://localhost:3001";
 
-export const baseUrl = "http://localhost:3000";
+export async function handleServerResponse(res) {
+  const data = await res.json();
 
-const token = localStorage.getItem("jwt");
+  if (!res.ok) {
+    throw new Error(data.message || `Error: ${res.status}`);
+  }
+  return data;
+}
+
+function getAuthHeaders() {
+  const token = localStorage.getItem("jwt");
+
+  return {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+}
 
 //Getting the article(s)
 export function getItems() {
-  return new Promise((resolve) => {
-    const saved = localStorage.getItem("savedArticles");
-    const items = saved ? JSON.parse(saved) : [];
-    resolve(items);
-  });
+  return fetch(`${baseUrl}/articles`, {
+    method: "GET",
+    headers: getAuthHeaders(),
+  }).then(handleServerResponse);
 }
 
 //Saving article
 export function saveArticle(article) {
-  return new Promise((resolve) => {
-    const existing = JSON.parse(localStorage.getItem("savedArticles")) || [];
-
-    const newArticle = {
-      ...article,
-      _id: crypto.randomUUID(),
-      savedAt: new Date().toISOString(),
-    };
-    existing.push(newArticle);
-    localStorage.setItem("savedArticles", JSON.stringify(existing));
-    resolve(newArticle);
-  });
+  return fetch(`${baseUrl}/articles`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(article),
+  }).then(handleServerResponse);
 }
 
 //Deleting article
 export function deleteArticle(articleId) {
-  return new Promise((resolve) => {
-    let items = JSON.parse(localStorage.getItem("savedArticles")) || [];
-    items = items.filter((item) => item._id !== articleId);
-    localStorage.setItem("savedArticles", JSON.stringify(items));
-    resolve({ message: "Article was deleted", articleId });
-  });
+  return fetch(`${baseUrl}/articles/${articleId}`, {
+    method: "DELETE",
+    headers: getAuthHeaders(),
+  }).then(handleServerResponse);
 }
 
 const api = {
@@ -46,10 +50,3 @@ const api = {
 };
 
 export default api;
-
-export function handleServerResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-}

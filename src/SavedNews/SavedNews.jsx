@@ -37,7 +37,7 @@ const SavedNews = ({
 
     if (sortedKeywords.length === 1) {
       return sortedKeywords[0];
-    } else if (sortedKeywords === 2) {
+    } else if (sortedKeywords.length === 2) {
       return `${sortedKeywords[0]} and ${sortedKeywords[1]}`;
     } else {
       return `${sortedKeywords[0]}, ${sortedKeywords[1]}, and ${

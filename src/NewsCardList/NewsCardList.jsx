@@ -71,7 +71,7 @@ function NewsCardList({
   );
 }
 
-NewsCard.propTypes = {
+NewsCardList.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
