@@ -1,4 +1,5 @@
-export const baseUrl = "http://localhost:3001";
+export const baseUrl =
+  import.meta.env.VITE_API_URL || "http://localhost:30010;";
 
 export async function handleServerResponse(res) {
   const data = await res.json();
