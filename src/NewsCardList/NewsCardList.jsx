@@ -14,7 +14,9 @@ function NewsCardList({
 }) {
   const [visibleCards, setVisibleCards] = useState(3);
 
-  const validArticles = articles.filter((article) => article.urlToImage);
+  const validArticles = articles.filter(
+    (article) => article.urlToImage || article.image,
+  );
 
   if (!validArticles || validArticles.length === 0) {
     return (
@@ -37,7 +39,9 @@ function NewsCardList({
   };
 
   const checkIfArticleIsSaved = (article) => {
-    return savedArticles.some((saved) => saved.url === article.url);
+    const articleLink = article.url || article.link;
+
+    return savedArticles.some((saved) => saved.link === articleLink);
   };
 
   return (
@@ -46,13 +50,20 @@ function NewsCardList({
         {validArticles.slice(0, visibleCards).map((article) => {
           return (
             <NewsCard
-              key={article.url}
+              articleId={article._id}
+              key={article._id || article.url || article.link}
               title={article.title}
-              description={article.description}
-              date={new Date(article.publishedAt).toLocaleDateString()}
-              source={article.source.name}
-              link={article.url}
-              image={article.urlToImage}
+              description={article.description || article.text}
+              date={new Date(
+                article.publishedAt || article.date,
+              ).toLocaleDateString()}
+              source={
+                typeof article.source === "string"
+                  ? article.source
+                  : article.source?.name
+              }
+              link={article.url || article.link}
+              image={article.urlToImage || article.image}
               isSaved={checkIfArticleIsSaved(article)}
               isLoggedIn={isLoggedIn}
               onSaveArticle={onSaveArticle}

@@ -7,6 +7,7 @@ import SaveUnMarked from "../../images/save-unmarked.svg";
 import TrashIcon from "../../images/trash.svg";
 
 function NewsCard({
+  articleId,
   title,
   description,
   date,
@@ -30,8 +31,8 @@ function NewsCard({
         onSaveArticle(title, link, description, source, image);
         setWasJustSaved(true);
       }
-    } else if (onDeleteArticle) {
-      onDeleteArticle(link);
+    } else if (onDeleteArticle && articleId) {
+      onDeleteArticle(articleId);
     }
   };
 
@@ -108,6 +109,7 @@ function NewsCard({
 //PropTypes Validation Information:
 
 NewsCard.propTypes = {
+  articleId: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
