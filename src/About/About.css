@@ -83,7 +83,7 @@
 }
 
 /* Mobile view*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .about__content {
     flex-direction: column;
     gap: 24px;

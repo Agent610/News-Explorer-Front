@@ -188,7 +188,7 @@
 }
 
 /* Mobile */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .navigation {
     justify-content: flex-end;
     height: 56px;

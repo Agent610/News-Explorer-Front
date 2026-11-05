@@ -70,7 +70,7 @@
 }
 
 /*Mobile */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .search-form {
     display: flex;
     flex-direction: column;

@@ -62,7 +62,7 @@
 }
 
 /* Mobile */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .login__link {
     margin-left: 20px;
   }

@@ -112,7 +112,7 @@
 }
 
 /*Mobile View*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .search__title {
     width: 288px;
   }

@@ -94,7 +94,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .newscard-list__container {
     display: grid;
     grid-template-rows: repeat(1, 1fr);
@@ -104,9 +104,9 @@
 
 /*Mobile view */
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
   .newscard-list {
-    max-width: 320px;
+    max-width: 440px;
     flex-direction: column;
     padding: 0;
   }
