@@ -1,34 +1,29 @@
-const News_URL = "https://newsapi.org/v2/everything";
-const API_KEY = "fb6cff6571004bdb8d9f0274dc7989a1";
+import { baseUrl } from "./api";
 
 export function searchNews(query) {
-  const today = new Date();
-  const sevenDaysAgo = new Date();
-  sevenDaysAgo.setDate(today.getDate() - 7);
+  const keyword = query.trim();
 
-  const from = sevenDaysAgo.toISOString().split("T")[0];
-  const to = today.toISOString().split("T")[0];
+  if (!keyword) {
+    return Promise.reject(new Error("Please enter a keyword."));
+  }
 
-  const url = `${News_URL}?q=${encodeURIComponent(
-    query,
-  )}&from=${from}&to=${to}&pageSize=100&apiKey=${API_KEY}`;
+  const url = `${baseUrl}/news?keyword=${encodeURIComponent(keyword)}`;
 
   return fetch(url)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`Please enter a keyword : ${response.statusText}`);
+        throw new Error(`News request failed: ${response.status}`);
       }
+
       return response.json();
     })
     .then((data) => data.articles)
     .catch((error) => {
-      console.error(
-        "Sorry, something went wrong during the request. Please try again later.",
-        error,
-      );
+      console.error("Error loading news:", error);
       throw error;
     });
 }
 
 const news = { searchNews };
+
 export default news;
