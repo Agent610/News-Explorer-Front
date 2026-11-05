@@ -1,5 +1,5 @@
 /* Mobile View */
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 320px) {
   .mobile {
     background-color: #1a1b22;
     height: 230px;

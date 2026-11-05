@@ -216,7 +216,7 @@
 }
 
 /*Mobile */
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 320px) {
   .news-card {
     max-width: 288px;
     height: 440px;

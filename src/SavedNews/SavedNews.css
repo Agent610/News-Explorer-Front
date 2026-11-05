@@ -63,7 +63,7 @@
 }
 
 /*Mobile View*/
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 320px) {
   .saved-news-page {
     padding-left: 16px;
     padding-right: 16px;

@@ -104,9 +104,9 @@
 
 /*Mobile view */
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 320px) {
   .newscard-list {
-    max-width: 425px;
+    max-width: 320px;
     flex-direction: column;
     padding: 0;
   }
