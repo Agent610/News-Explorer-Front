@@ -14,9 +14,11 @@ function NewsCardList({
 }) {
   const [visibleCards, setVisibleCards] = useState(3);
 
-  const validArticles = articles.filter(
-    (article) => article.urlToImage || article.image,
-  );
+  // const validArticles = articles.filter(
+  //   (article) => article.urlToImage || article.image,
+  // );
+
+  const validArticles = articles;
 
   if (!validArticles || validArticles.length === 0) {
     return (

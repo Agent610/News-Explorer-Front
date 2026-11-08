@@ -42,7 +42,13 @@ function NewsCard({
         {!isHome && keyword && (
           <div className="news-card__keyword">{keyword}</div>
         )}
-        <img src={image} alt={title} className="news-card__image" />
+        {image ? (
+          <img src={image} alt={title} className="news-card__image" />
+        ) : (
+          <div className="news-card__image news-card__image-placeholder">
+            Image unavailable
+          </div>
+        )}
 
         <div
           className="news-card__save-wrapper"
@@ -115,7 +121,7 @@ NewsCard.propTypes = {
   date: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   isSaved: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   onSaveArticle: PropTypes.func.isRequired,
