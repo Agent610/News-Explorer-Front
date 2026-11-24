@@ -1,13 +1,63 @@
-Hello this is Devin Bhavsar and this is the frontend of my News Explorer project, the backend will be a separate repo.
-Throughout this project the following languages were used: HTML,CSS,Javascript, and React.
+News Explorer - Frontend
+News Explorer as a whole both is a responsive web application that allows users to search for news articles based on keywords and topics of interest. The application retrives and displays news articles using external APIs, providing users with an easy way to explore current news.
 
-Throughout this project the command npm run dev started the application in a web browser.
+The frontend was developed using React, JavaScript, HTML, and CSS. The backend portion is maintained in a separate repository.
 
-When the application is opened the user is allowed to search for articles based off what they put in the search-input field. This project's purpose is to display news articles using APIs, the purpose of an API is to tell the browser a command for example when a user logs in a request is sent to server telling that a user is attempting to sign in.
+Technologies Used
 
-When a user wants to sign in the they click on the sign in button IF the user already has an account they can sign in with their login credentials a main difference between the sign in process and the register process is after the user registers a popup confirming that their registration is completed will come along with the option to sign in or close the popup.
+HTML5 – Application structure
+CSS3 – Styling and responsive layouts
+JavaScript (ES6+) – Application logic and functionality
+React – Component-based user interface development
+Vite – Development server and build tooling
+APIs – Retrieving news articles and communicating with the backend
 
-When the user is signed in they can search for articles based off what they want to view, a very important feature about this application you DON'T have to have an account to search for articles you just can't save them into your saved news page.
+Features
+
+News Search
+Search for news articles using keywords entered into the search field.
+Retrieve and display relevant articles through API requests.
+Browse news articles without needing to create an account.
+
+User Authentication
+Existing users can sign in using their account credentials.
+New users can register for an account.
+After successful registration, a confirmation popup appears with the option to sign in or close the popup.
+
+Saved Articles
+Authenticated users can save news articles.
+Saved articles are accessible through the Saved News page.
+Guest users can search and browse articles but must sign in to save them.
+
+Guest Access
+Users do not need an account to search for or browse news articles.
+Account registration is only necessary for features that require authentication, such as saving articles.
+
+Getting Started
+To run this project locally, follow these steps.
+
+Prerequisites:
+Node.js
+npm
+
+Installation
+
+Clone the repository:
+git clone https://github.com/Agent610/News-Explorer-Front.git
+
+Navigate into the project directory:
+cd News-Explorer-Front
+
+Install the dependencies:
+npm install
+
+Start the development server:
+npm run dev
+
+Open the local URL provided by Vite in your browser.
 
 Link to Github:
 https://github.com/Agent610/News-Explorer-Front
+
+Link to Live Application
+https://news-explorer-tawny.vercel.app/
